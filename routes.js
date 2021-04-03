@@ -17,5 +17,8 @@ var runController = require('./runController');
 router.route('/run')
   .get(runController.index);
 
+router.route('/run/hitlist/:month')
+  .get(runController.hitlist);
+
 //Export API routes
 module.exports = router;

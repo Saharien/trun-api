@@ -10,7 +10,23 @@ exports.index = function (req, res) {
             });
         res.json({
             status: "success",
-            message: "Got Run Successfully!",
+            message: "Got Runs Successfully!",
+            data: run       
+        });
+    });
+};
+
+//For hitlist
+exports.hitlist = function (req, res) {
+    Run.getHitlist(req.params.month, function (err, run) {
+        if (err)
+            res.json({
+                status: "error",
+                message: err
+            });
+        res.json({
+            status: "success",
+            message: "Got Hitlist Successfully!",
             data: run       
         });
     });

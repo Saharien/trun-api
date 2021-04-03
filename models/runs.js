@@ -15,19 +15,24 @@ module.exports = Run;
 
 
 
-// module.exports.get = function (callback, limit) {
-//     Run.find(callback).limit(limit); 
-//  }
+module.exports.get = function (callback, limit) {
+    Run.find(callback).limit(limit); 
+ }
 
-module.exports.get = function (callback) {
-  console.log(new Date('2021-04-01'));
+module.exports.getHitlist = function (month, callback) {
+  
+  monthInt = parseInt(month);
+  nextMonthInt = monthInt + 1;
+  monthString = monthInt.toString().padStart(2, '0');
+  nextMonthString = nextMonthInt.toString().padStart(2, '0');
+    
   Run.aggregate(
     [
       {
         $match: {
           date: {
-            $gte: new Date('2021-04-01'),
-            $lt:  new Date('2021-05-01')
+            $gte: new Date('2021-' + monthString + '-01'),
+            $lt:  new Date('2021-' + nextMonthString + '-01')
           }
         }
       },
