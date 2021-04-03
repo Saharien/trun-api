@@ -12,6 +12,7 @@ router.get('/', function(req, res) {
 });
 
 var runController = require('./runController');
+var bikeController = require('./bikeController');
 
 // Run routes
 router.route('/run')
@@ -22,10 +23,10 @@ router.route('/run/hitlist/:month')
 
 // Run routes
 router.route('/biking')
-  .get(runController.index);
+  .get(bikeController.index);
 
 router.route('/biking/hitlist/:month')
-  .get(runController.hitlist);  
+  .get(bikeController.hitlist);  
 
 //Export API routes
 module.exports = router;
