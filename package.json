@@ -1,0 +1,24 @@
+{
+  "name": "trun-api",
+  "version": "1.0.0",
+  "description": "API to read T.RUN runs/bikings",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Saharien/trun-api.git"
+  },
+  "author": "Michael Karl",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Saharien/trun-api/issues"
+  },
+  "homepage": "https://github.com/Saharien/trun-api#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.12.3"
+  }
+}
