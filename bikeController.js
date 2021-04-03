@@ -1,8 +1,8 @@
-Biking = require('./models/bikings.js');
+Run = require('./models/runs.js');
 
 //For index
 exports.index = function (req, res) {
-    Biking.get(function (err, biking) {
+    Run.get(function (err, run) {
         if (err)
             res.json({
                 status: "error",
@@ -10,15 +10,15 @@ exports.index = function (req, res) {
             });
         res.json({
             status: "success",
-            message: "Got Bikings Successfully!",
-            data: biking       
+            message: "Got Runs Successfully!",
+            data: run       
         });
     });
 };
 
 //For hitlist
 exports.hitlist = function (req, res) {
-    Biking.getHitlist(req.params.month, function (err, biking) {
+    Run.getHitlist(req.params.month, function (err, run) {
         if (err)
             res.json({
                 status: "error",
@@ -26,8 +26,8 @@ exports.hitlist = function (req, res) {
             });
         res.json({
             status: "success",
-            message: "Got Biking Hitlist Successfully!",
-            data: biking       
+            message: "Got Hitlist Successfully!",
+            data: run       
         });
     });
 };

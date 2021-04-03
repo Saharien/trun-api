@@ -12,9 +12,6 @@ let Run = mongoose.model('Run', runsSchema);
 
 module.exports = Run;
 
-
-
-
 module.exports.get = function (callback, limit) {
     Run.find(callback).limit(limit); 
  }

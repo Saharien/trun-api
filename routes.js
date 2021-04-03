@@ -20,5 +20,12 @@ router.route('/run')
 router.route('/run/hitlist/:month')
   .get(runController.hitlist);
 
+// Run routes
+router.route('/biking')
+  .get(runController.index);
+
+router.route('/biking/hitlist/:month')
+  .get(runController.hitlist);  
+
 //Export API routes
 module.exports = router;
