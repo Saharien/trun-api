@@ -12,7 +12,8 @@ var port = process.env.PORT || 8080;
 // Um Probleme mit Chrome CORS Policy zu vermeiden
 app.use(function (req, res, next) {
     res.setHeader("Access-Control-Allow-Origin", "*");
-    res.header('Access-Control-Allow-Methods', 'GET,OPTIONS');
+    res.setHeader('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,PATCH,OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', 'pass');
     return next();
 });
 
