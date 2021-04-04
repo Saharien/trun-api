@@ -9,10 +9,16 @@ let mongoose = require('mongoose');
 let app = express();
 var port = process.env.PORT || 8080;
 
+// Um Probleme mit Chrome CORS Policy zu vermeiden
+app.use(function (req, res, next) {
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    return next();
+});
+
 app.get('/', (req, res) => res.send('Welcome to Express'));
 
 app.listen(port, function () {
-    console.log("Running FirstRest on Port " + port);
+    console.log("Running trun-api on Port " + port);
 })
 
 // Use API routes in the App
