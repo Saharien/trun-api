@@ -7,7 +7,7 @@ let bodyParser = require('body-parser');
 let mongoose = require('mongoose');
 
 let app = express();
-var port = process.env.PORT || 8080;
+var port = process.env.PORT || 80;
 
 // Um Probleme mit Chrome CORS Policy zu vermeiden
 app.use(function (req, res, next) {
