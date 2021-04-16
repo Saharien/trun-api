@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 
 let bikingsSchema = new mongoose.Schema({
+    activity: String,
     url: String,
     timestamp: String,
     name: String,
@@ -39,7 +40,7 @@ module.exports.getHitlist = function (month, callback) {
       {
         $group:
         {
-          _id: { name: "$name" },
+          _id: { name: "$name", url: "$url" },
           totalAmount: { $sum: "$distance" },
           //totalAmount: { $sum: { $round: [ "$distance", 2 ] } }, (rundet die Einzelzahlen, wenn dann das Endergebnis runden)
           elevgain: { $sum: "$elevgain" },
