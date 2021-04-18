@@ -5,9 +5,16 @@ let express = require('express')
 let apiRoutes = require("./routes")
 let bodyParser = require('body-parser');
 let mongoose = require('mongoose');
+let fs = require('fs');
+let https = require('https');
+
+const privateKey = fs.readFileSync('sslcert/privkey.pem', 'utf8');
+const certificate = fs.readFileSync('sslcert/cert.pem', 'utf8');
+const ca = fs.readFileSync('sslcert/chain.pem', 'utf8');
+
+var creds = {key: privateKey, cert: certificate, ca: ca};
 
 let app = express();
-var port = process.env.PORT || 80;
 
 // Um Probleme mit Chrome CORS Policy zu vermeiden
 app.use(function (req, res, next) {
@@ -19,10 +26,6 @@ app.use(function (req, res, next) {
 
 app.get('/', (req, res) => res.send('Welcome to Express'));
 
-app.listen(port, function () {
-    console.log("Running trun-api on Port " + port);
-})
-
 // Use API routes in the App
 app.use('/api', apiRoutes);
 
@@ -33,13 +36,15 @@ app.use(bodyParser.urlencoded({
 
 app.use(bodyParser.json());
 
+var httpsServer = https.createServer(creds, app);
+httpsServer.listen(443, () => {
+        console.log('HTTPS Server running on port 443');
+});
+
 mongo = mongoose.connect(CREDENTIALS.dburl, { useNewUrlParser: true, useUnifiedTopology: true, user: CREDENTIALS.dbuser, pass: CREDENTIALS.dbpass, authSource: 'admin' });
 
 mongo.then(() => {
     console.log('Connected to mongodb');
 }, error => {
     console.log(error, 'Error when connecting to mongodb');
-})
-
-
-
+});
