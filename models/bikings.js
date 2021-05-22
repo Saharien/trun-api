@@ -1,14 +1,14 @@
 const mongoose = require('mongoose');
 
 let bikingsSchema = new mongoose.Schema({
-    activity: String,
-    url: String,
-    timestamp: String,
-    name: String,
-    distance: Number,
-    elevgain: Number,
-    type: String,
-    date: Date
+  activity: String,
+  url: String,
+  timestamp: String,
+  name: String,
+  distance: Number,
+  elevgain: Number,
+  type: String,
+  date: Date
 });
 
 let Biking = mongoose.model('Biking', bikingsSchema);
@@ -16,23 +16,28 @@ let Biking = mongoose.model('Biking', bikingsSchema);
 module.exports = Biking;
 
 module.exports.get = function (callback, limit) {
-    Biking.find(callback).limit(limit); 
- }
+  Biking.find(callback).limit(limit);
+}
 
 module.exports.getHitlist = function (month, callback) {
-  
-  monthInt = parseInt(month);
-  nextMonthInt = monthInt + 1;
+
+  if (month == 'S') {
+    monthInt = 4;
+    nextMonthInt = 7;
+  } else {
+    monthInt = parseInt(month);
+    nextMonthInt = monthInt + 1;
+  }
   monthString = monthInt.toString().padStart(2, '0');
   nextMonthString = nextMonthInt.toString().padStart(2, '0');
-    
+
   Biking.aggregate(
     [
       {
         $match: {
           date: {
             $gte: new Date('2021-' + monthString + '-01'),
-            $lt:  new Date('2021-' + nextMonthString + '-01')
+            $lt: new Date('2021-' + nextMonthString + '-01')
           }
         }
       },

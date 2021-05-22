@@ -19,8 +19,13 @@ module.exports.get = function (callback, limit) {
 
 module.exports.getHitlist = function (month, callback) {
   
-  monthInt = parseInt(month);
-  nextMonthInt = monthInt + 1;
+  if (month == 'S') {
+    monthInt = 4;
+    nextMonthInt = 7;
+  } else {
+    monthInt = parseInt(month);
+    nextMonthInt = monthInt + 1;
+  }
   monthString = monthInt.toString().padStart(2, '0');
   nextMonthString = nextMonthInt.toString().padStart(2, '0');
     

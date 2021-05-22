@@ -24,10 +24,13 @@ app.use(function (req, res, next) {
     return next();
 });
 
-app.get('/', (req, res) => res.send('Welcome to Express'));
+//app.get('/', (req, res) => res.send('Welcome to Express'));
 
 // Use API routes in the App
 app.use('/api', apiRoutes);
+
+// https-Server in /
+app.use('/', express.static('/home/trun/trun-api/static'));
 
 // Configure bodyparser to hande the post requests
 app.use(bodyParser.urlencoded({
