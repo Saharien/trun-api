@@ -38,3 +38,47 @@ exports.hitlist = function (req, res) {
         });
     });
 };
+
+//For overview
+exports.overview = function (req, res) {
+    
+    if(Auth.checkAuth(req, res)==false) {
+        return;
+    }
+    
+    Biking.getOverview(req.params.month, function (err, run) {
+        if (err)
+            res.json({
+                status: "error",
+                message: err
+            });
+        res.json({
+            status: "success",
+            message: "Got overview successfully.",
+            data: run       
+        });
+    });
+    
+};
+
+//For longest bikings
+exports.longest = function (req, res) {
+    
+    if(Auth.checkAuth(req, res)==false) {
+        return;
+    }
+    
+    Biking.getLongest(req.params.month, function (err, run) {
+        if (err)
+            res.json({
+                status: "error",
+                message: err
+            });
+        res.json({
+            status: "success",
+            message: "Got longest bikings successfully.",
+            data: run       
+        });
+    });
+    
+};

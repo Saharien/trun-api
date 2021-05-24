@@ -39,18 +39,16 @@ var runController = require('./runController');
 var bikeController = require('./bikeController');
 
 // Run routes
-router.route('/run')
-  .get(checkJwt, runController.index);
+router.route('/run').get(checkJwt, runController.index);
+router.route('/run/hitlist/:month').get(checkJwt, runController.hitlist);
+router.route('/run/overview').get(checkJwt, runController.overview);
+router.route('/run/longest').get(checkJwt, runController.longest);
 
-router.route('/run/hitlist/:month')
-  .get(checkJwt, runController.hitlist);
-
-// Run routes
-router.route('/biking')
-  .get(checkJwt, bikeController.index);
-
-router.route('/biking/hitlist/:month')
-  .get(checkJwt, bikeController.hitlist);  
+// Bike routes
+router.route('/biking').get(checkJwt, bikeController.index);
+router.route('/biking/hitlist/:month').get(checkJwt, bikeController.hitlist);  
+router.route('/biking/overview').get(checkJwt, bikeController.overview);
+router.route('/biking/longest').get(checkJwt, bikeController.longest);
 
 //Export API routes
 module.exports = router;

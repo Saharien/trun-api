@@ -7,10 +7,11 @@ let bodyParser = require('body-parser');
 let mongoose = require('mongoose');
 let fs = require('fs');
 let https = require('https');
+let path = require('path');
 
-const privateKey = fs.readFileSync('sslcert/privkey.pem', 'utf8');
-const certificate = fs.readFileSync('sslcert/cert.pem', 'utf8');
-const ca = fs.readFileSync('sslcert/chain.pem', 'utf8');
+const privateKey = fs.readFileSync(path.resolve(__dirname, 'sslcert/privkey.pem'), 'utf8');
+const certificate = fs.readFileSync(path.resolve(__dirname, 'sslcert/cert.pem'), 'utf8');
+const ca = fs.readFileSync(path.resolve(__dirname, 'sslcert/chain.pem'), 'utf8');
 
 var creds = { key: privateKey, cert: certificate, ca: ca };
 

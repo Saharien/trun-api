@@ -56,3 +56,35 @@ module.exports.getHitlist = function (month, callback) {
     ],
     callback);
 }
+
+module.exports.getOverview = function (month, callback) {
+    
+  Biking.aggregate(
+    [
+      {
+        $match: {
+          date: {
+            $gte: new Date('2021-04-01'),
+            $lt:  new Date('2021-06-01')
+          }
+        }
+      },
+
+      {
+        $group:
+        {
+          _id: { month: { $month: "$date" } },          
+          totalAmount: { $sum: "$distance" },
+          count: { $sum: 1 },
+        }
+      },
+      { $sort: { "totalAmount": -1 } }
+    ],
+    callback);
+}
+
+module.exports.getLongest = function (month, callback) {
+    
+  Biking.find(callback).sort('-distance').limit(10);
+  
+}

@@ -45,12 +45,43 @@ module.exports.getHitlist = function (month, callback) {
         {
           _id: { name: "$name", url: "$url" },
           totalAmount: { $sum: "$distance" },
-          //totalAmount: { $sum: { $round: [ "$distance", 2 ] } }, (rundet die Einzelzahlen, wenn dann das Endergebnis runden)
           count: { $sum: 1 },
-
         }
       },
       { $sort: { "totalAmount": -1 } }
     ],
     callback);
+}
+
+module.exports.getOverview = function (month, callback) {
+    
+  Run.aggregate(
+    [
+      {
+        $match: {
+          date: {
+            $gte: new Date('2021-04-01'),
+            $lt:  new Date('2021-06-01')
+          }
+        }
+      },
+
+      {
+        $group:
+        {
+          //_id: { name: "$name", url: "$url" },
+          _id: { month: { $month: "$date" } },          
+          totalAmount: { $sum: "$distance" },
+          count: { $sum: 1 },
+        }
+      },
+      { $sort: { "totalAmount": -1 } }
+    ],
+    callback);
+}
+
+module.exports.getLongest = function (month, callback) {
+    
+  Run.find(callback).sort('-distance').limit(10);
+  
 }
