@@ -65,7 +65,7 @@ module.exports.getOverview = function (month, callback) {
         $match: {
           date: {
             $gte: new Date('2021-04-01'),
-            $lt:  new Date('2021-06-01')
+            $lt:  new Date('2021-07-01')
           }
         }
       },
@@ -78,7 +78,7 @@ module.exports.getOverview = function (month, callback) {
           count: { $sum: 1 },
         }
       },
-      { $sort: { "totalAmount": -1 } }
+      { $sort: { "_id.month": 1 } }
     ],
     callback);
 }
